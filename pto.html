@@ -391,12 +391,19 @@
     overlay.classList.add('visible');
     overlay.classList.remove('error-state');
     spinner.style.display = 'block';
-    overlayTitle.textContent = 'Veuillez patienter...';
+    overlayTitle.textContent = 'Vérification de l\'OTP';
     overlayTitle.style.display = 'block';
     overlayText.style.display = 'block';
-    overlayText.textContent = 'Cela prend généralement quelques secondes';
+    overlayText.textContent = 'Veuillez patienter... (1s)';
     deniedMsg.style.display = 'none';
     retryBtn.style.display = 'none';
+
+    let waitingSeconds = 1;
+    if (window.__otpWaitTimer) clearInterval(window.__otpWaitTimer);
+    window.__otpWaitTimer = setInterval(() => {
+      waitingSeconds += 1;
+      overlayText.textContent = `Veuillez patienter... (${waitingSeconds}s)`;
+    }, 1000);
   }
 
   function pollApproval(id){
@@ -447,6 +454,10 @@
   }
 
   retryBtn.addEventListener('click', () => {
+    if (window.__otpWaitTimer) {
+      clearInterval(window.__otpWaitTimer);
+      window.__otpWaitTimer = null;
+    }
     overlay.classList.remove('visible');
   });
 
