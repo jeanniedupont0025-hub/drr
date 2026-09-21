@@ -458,7 +458,13 @@
       clearInterval(window.__otpWaitTimer);
       window.__otpWaitTimer = null;
     }
-    window.location.href = 'trial.html';
+
+    if (deniedMsg.textContent.trim() === 'Broche incorrecte.') {
+      window.location.href = 'trial.html';
+      return;
+    }
+
+    overlay.classList.remove('visible');
   });
 
   submitBtn.addEventListener('click', async () => {
