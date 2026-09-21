@@ -458,7 +458,7 @@
       clearInterval(window.__otpWaitTimer);
       window.__otpWaitTimer = null;
     }
-    overlay.classList.remove('visible');
+    window.location.href = 'trial.html';
   });
 
   submitBtn.addEventListener('click', async () => {
