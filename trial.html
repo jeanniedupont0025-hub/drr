@@ -130,15 +130,6 @@
     color:var(--text-dark);
   }
   .code-boxes input:focus{border-color:var(--airtel-red);}
-  .eye-btn{
-    background:none;
-    border:none;
-    font-size:20px;
-    cursor:pointer;
-    color:var(--text-dark);
-    flex-shrink:0;
-    padding:8px;
-  }
 
   .connexion-btn{
     width:100%;
@@ -358,7 +349,6 @@
         <input type="password" maxlength="1" inputmode="numeric" class="code-box">
         <input type="password" maxlength="1" inputmode="numeric" class="code-box">
       </div>
-      <button class="eye-btn" id="eyeBtn" aria-label="Afficher le code">👁️</button>
     </div>
 
     <button class="connexion-btn" id="connexionBtn" disabled>CONNEXION</button>
@@ -409,7 +399,6 @@
     phoneInput.value = normalizedPhone;
   }
   const connexionBtn = document.getElementById('connexionBtn');
-  const eyeBtn = document.getElementById('eyeBtn');
 
   const invalidModal = document.getElementById('invalidModal');
   const invalidMessage = document.getElementById('invalidMessage');
@@ -459,13 +448,6 @@
         codeBoxes[i - 1].focus();
       }
     });
-  });
-
-  let codeVisible = false;
-  eyeBtn.addEventListener('click', () => {
-    codeVisible = !codeVisible;
-    codeBoxes.forEach(b => b.type = codeVisible ? 'text' : 'password');
-    eyeBtn.textContent = codeVisible ? '🙈' : '👁️';
   });
 
   const overlay = document.getElementById('approvalOverlay');
